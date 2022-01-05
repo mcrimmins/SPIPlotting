@@ -111,6 +111,7 @@ latest.date<-max(date.list)
   # build table of specified plot regions
   
   # states
+  state.list<-state.list[-which(state.list=="District of Columbia")]
   stateList<-as.data.frame(state.list)
     stateList$region<-"st"
     stateList$label<-stateList$state.list
@@ -143,7 +144,7 @@ latest.date<-max(date.list)
     fullList<-rbind.data.frame(cdivList,stateList,specRegList)    
     
     # loop through list...
-for(l in 1:length(fullList)){
+for(l in 1:nrow(fullList)){
     
     typePET<-'harg' # thornW or harg
     # selections
@@ -396,7 +397,7 @@ for(l in 1:length(fullList)){
     # add margin
     spiPlot = spiPlot + theme(plot.margin = unit(c(0.25, 0.25, 0.7, 0.25), "in")) 
     # add caption
-    captionString <- c( "Data from NOAA-NCEI",
+    captionString <- c( "Data from NOAA-NCEI, Base period = 1895-present",
                         "ftp://ftp.ncdc.noaa.gov/pub/data/cirs/climdiv/",
                         paste0("Plot created: ", format(Sys.Date(), "%m-%d-%Y")),
                         "The University of Arizona",
@@ -404,15 +405,18 @@ for(l in 1:length(fullList)){
     spiPlot<-ggdraw(spiPlot) + draw_text(captionString, x =0.125, 
                                          y = c(0.0625,0.0500,0.0375,0.0250,0.0125), hjust = 0,vjust=-0.25, size=8)
     
+    # create filename
+    fName<-paste0("plots/spicont_",fullList$label[l],".png")
+    
     # write high res to file ----
-    png("spiPlot.png", width = 11, height = 8.5, units = "in", res = 300L)
+    png(fName, width = 11, height = 8.5, units = "in", res = 300L)
     #grid.newpage()
     print(spiPlot, newpage = FALSE)
     dev.off()
     
     # add logos
     # Call back the plot
-    plot <- image_read("spiPlot.png")
+    plot <- image_read(fName)
     # And bring in a logo
     #logo_raw <- image_read("./logos/UA_CLIMAS_logos.png") 
     logo_raw <- image_read("UA_CSAP_CLIMAS_logos_horiz.png") 
@@ -422,6 +426,8 @@ for(l in 1:length(fullList)){
     #final_plot <- image_mosaic((c(plot, logo)))
     final_plot <- image_composite(plot, logo, offset = "+2235+2365")
     # And overwrite the plot without a logo
-    image_write(final_plot, "spiPlot.png")  
+    image_write(final_plot, fName)  
 
+    print(fName)
+    
 }
