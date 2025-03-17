@@ -38,7 +38,7 @@ add.months= function(date,n) seq(date, by = paste (n, "months"), length = 2)[2]
 # ------
 
 # load supporting data from Rdata file generateSupportingData.R
-load("nClimDivApp_Data.RData")
+load("/home/crimmins/RProjects/SPIPlotting/nClimDivApp_Data.RData")
 
 # date list for picker - advances on 10th of month
 sysDay<-as.numeric(format(Sys.Date(),"%d"))
@@ -406,7 +406,7 @@ for(l in 1:nrow(fullList)){
                                          y = c(0.0625,0.0500,0.0375,0.0250,0.0125), hjust = 0,vjust=-0.25, size=8)
     
     # create filename
-    fName<-paste0("plots/spicont_",fullList$label[l],".png")
+    fName<-paste0("/home/crimmins/RProjects/SPIPlotting/plots/spicont_",fullList$label[l],".png")
     
     # write high res to file ----
     png(fName, width = 11, height = 8.5, units = "in", res = 300L)
@@ -419,7 +419,7 @@ for(l in 1:nrow(fullList)){
     plot <- image_read(fName)
     # And bring in a logo
     #logo_raw <- image_read("./logos/UA_CLIMAS_logos.png") 
-    logo_raw <- image_read("UA_CSAP_CLIMAS_logos_horiz.png") 
+    logo_raw <- image_read("/home/crimmins/RProjects/SPIPlotting/UA_CSAP_CLIMAS_logos_horiz.png") 
     logo <- image_resize(logo_raw, geometry_size_percent(width=95,height = 95))
     # Stack them on top of each other
     #final_plot <- image_append((c(plot, logo)), stack = TRUE)
@@ -431,3 +431,6 @@ for(l in 1:nrow(fullList)){
     print(fName)
     
 }
+    
+    source('/home/crimmins/RProjects/SPIPlotting/pushNotify.R')
+    
