@@ -275,7 +275,7 @@ for(l in 1:nrow(fullList)){
     if (typePET=="thornW"){
       PET <- thornthwaite(fahrenheit.to.celsius(tempDataMelt$tmean,round=2), as.numeric(centroid[2]), na.rm = TRUE) 
     }else{
-      PET <- hargreaves(fahrenheit.to.celsius(tempDataMelt$tmin,round=2),fahrenheit.to.celsius(tempDataMelt$tmax,round=2),Ra=NA, as.numeric(centroid[2]), na.rm = TRUE) 
+      PET <- hargreaves(fahrenheit.to.celsius(tempDataMelt$tmin,round=2),fahrenheit.to.celsius(tempDataMelt$tmax,round=2),Ra=NULL, as.numeric(centroid[2]), na.rm = TRUE) 
     }
     dfSPEI<-tempDataMelt[,1:3]
     for(i in 1:60){
@@ -432,5 +432,5 @@ for(l in 1:nrow(fullList)){
     
 }
     
-    source('/home/crimmins/RProjects/SPIPlotting/pushNotify.R')
+    #source('/home/crimmins/RProjects/SPIPlotting/pushNotify.R')
     
