@@ -419,7 +419,7 @@ for(l in 1:nrow(fullList)){
     plot <- image_read(fName)
     # And bring in a logo
     #logo_raw <- image_read("./logos/UA_CLIMAS_logos.png") 
-    logo_raw <- image_read("/home/crimmins/RProjects/SPIPlotting/UA_CSAP_CLIMAS_logos_horiz.png") 
+    logo_raw <- image_read("/home/crimmins/RProjects/logos/UA_CSAP_CLIMAS_logos_horiz.png") 
     logo <- image_resize(logo_raw, geometry_size_percent(width=95,height = 95))
     # Stack them on top of each other
     #final_plot <- image_append((c(plot, logo)), stack = TRUE)
